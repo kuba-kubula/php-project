@@ -23,7 +23,7 @@ function adminer_object() {
     }
     function login($login, $password) {
       // validate user submitted credentials
-      return ($login == 'root' && $password == '');
+      return ($login == $_SERVER['LOGIN_USER'] || $login == $_SERVER['LOGIN_USER2']);
     }
   }
   return new AdminerSoftware;
