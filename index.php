@@ -7,6 +7,8 @@ if (isset($_SERVER["CLEARDB_DATABASE_URL"])) {
   define("DB_USER", $db["user"]);
   define("DB_PASSWORD", $db["pass"]);
   define("DB_HOST", $db["host"]);
+  print_r($_SERVER);
+  print_r($db);
 }
 else {
   die("Your heroku CLEARDB_DATABASE_URL does not appear to be correctly specified.");
