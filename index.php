@@ -16,24 +16,20 @@ else {
 
 
 function adminer_object() {
-
   class AdminerSoftware extends Adminer {
-
-  function name() {
-    // custom name in title and heading
-    return 'Strepiny';
+    function name() {
+      // custom name in title and heading
+      return 'Strepiny';
+    }
+    function credentials() {
+      // server, username and password for connecting to database
+      return array(DB_HOST, DB_USER, DB_PASSWORD);
+    }
+    function login($login, $password) {
+      // validate user submitted credentials
+      return ($login == 'root' && $password == '');
+    }
   }
-
-  function credentials() {
-    // server, username and password for connecting to database
-    return array(DB_HOST, DB_USER, DB_PASSWORD);
-  }
-
-  function login($login, $password) {
-    // validate user submitted credentials
-    return ($login == 'root' && $password == '');
-  }
-
   return new AdminerSoftware;
 }
 
