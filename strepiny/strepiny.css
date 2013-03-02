@@ -1,0 +1,428 @@
+body {
+	color: #DDEEFF;
+	background-color: #020014;
+	font-size: 10px;
+	padding: 0px;
+	margin: 2px;
+	background-image: url('img/ajax-loader.gif');
+	background-repeat: no-repeat;
+	background-position: -50px -50px;
+}
+
+@font-face {
+	font-family: 'omikron-webfont';
+	src: url('Fonts/omikron-webfont.eot');
+	src: url('Fonts/omikron-webfont.eot?#iefix') format('embedded-opentype'),
+				url('Fonts/omikron-webfont.woff') format('woff'),
+				url('Fonts/omikron-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-size: 10px;
+}
+#environment {
+	font-size: 1.8em;
+	color: rgb(0, 255, 255);
+}
+#environment #keyboard .button {
+	font-size: 1.3em;
+	color: rgb(9, 241, 187);
+}
+#environment #keyboard .button.hover {
+	color: rgb(80, 160, 190);
+}
+
+.error {
+	color: rgb(150, 0, 0) !important;
+}
+
+#environment.omikron-webfont .button,
+#environment.omikron-webfont div
+ {
+	font-family: 'omikron-webfont', sans-serif;
+}
+#environment.omikron-webfont .button {
+	line-height: 60px;
+}
+#environment .fontButton.omikron-webfont {
+	font-size: 40px !important;
+	line-height: 60px !important;
+	font-family: 'omikron-webfont', sans-serif !important;
+}
+
+@font-face {
+	font-family: 'alien_linessymbol';
+	src: url('Fonts/alien_lines_1.9-webfont.woff') format('woff'),
+				url('Fonts/alien_lines_1.9-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+#environment.alien_linessymbol .button,
+#environment.alien_linessymbol div
+ {
+	font-family: 'alien_linessymbol', sans-serif;
+}
+#environment.alien_linessymbol .button {
+	line-height: 60px;
+}
+#environment .fontButton.alien_linessymbol {
+	font-family: 'alien_linessymbol', sans-serif !important;
+	line-height: 60px !important;
+	font-size: 22px !important;
+}
+
+@font-face {
+	font-family: 'anilloregular';
+	src: url('Fonts/anillo-webfont.woff') format('woff'),
+				url('Fonts/anillo-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+#environment.anilloregular
+ {
+	font-size: 0.8em;
+}
+#environment.anilloregular .button,
+#environment.anilloregular div
+ {
+	font-family: 'anilloregular', sans-serif;
+}
+#environment.anilloregular .button {
+	line-height: 60px;
+}
+#environment .fontButton.anilloregular {
+	font-family: 'anilloregular', sans-serif !important;
+	line-height: 60px !important;
+	font-size: 9px !important;
+}
+
+@font-face {
+	font-family: 'silverstreamregular';
+	src: url('Fonts/silverstream-webfont.woff') format('woff'),
+				url('Fonts/silverstream-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+#environment.silverstreamregular .button,
+#environment.silverstreamregular div
+ {
+	font-family: 'silverstreamregular', sans-serif;
+}
+#environment.silverstreamregular .button {
+	line-height: 60px;
+}
+#environment .fontButton.silverstreamregular {
+	font-family: 'silverstreamregular', sans-serif !important;
+	line-height: 66px !important;
+	font-size: 24px !important;
+}
+
+#environment .button {
+	font-size: 2.1em;
+}
+#environment #inputLine {
+	font-size: 1.5em;
+	color: #0ff;
+	text-indent: 2px;
+	position: absolute;
+	text-overflow: ellipsis;
+}
+#environment.alien_linessymbol #inputLine {
+	font-size: 1.2em;
+}
+#environment.omikron-webfont #inputLine {
+	font-size: 1.6em;
+	line-height: 25px;
+}
+#environment.silverstreamregular #inputLine {
+	font-size: 1.1em;
+	line-height: 25px !important;
+}
+#environment.anilloregular #inputLine {
+	font-size: 1.1em;
+	line-height: 20px;
+}
+#environment #dta {
+	pointer-events: none;
+	position: absolute;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 1px 15px 0 8px;
+	margin: 5px 0 0 -1px;
+	overflow: auto;
+	border-radius: 11px 23px 23px 11px;
+}
+#environment #dta > div {
+	font-size: 16px;
+	line-height: 18px;
+	white-space: pre-wrap;
+	color: #0ff;
+	position: relative;
+	left: 0;
+	top: 0;
+	width: 100%;
+	padding-right: 20px;
+}
+#environment.silverstreamregular #dta div {
+	font-size: 16px;
+	line-height: 18px;
+}
+#environment.anilloregular #dta div {
+	font-size: 7px;
+	line-height: 18px;
+}
+#environment.omikron-webfont #dta div {
+	font-size: 16px;
+	line-height: 18px;
+}
+
+#projection {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1024px;
+	height: 768px;
+	overflow: hidden;
+	z-index: 5;
+}
+
+#projection canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1024px;
+	height: 768px;
+	z-index: 3;
+}
+
+#projection canvas.vis {
+	z-index: 5;
+}
+
+.projectionSvg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 768px;
+	width: 1024px;
+}
+.projectionSvg svg, .projectionSvg svg ~ svg {
+	visibility: hidden;
+}
+#canvasFin {
+	z-index: 5;
+	background: #000 url('img/bg-FINAL.png') 16px 0 no-repeat;
+}
+
+#workerC {
+	z-index: 3
+}
+
+.invisible { visibility: hidden; }
+.visible { visibility: visible; }
+img.tt { position: absolute; z-index: 4; }
+.hidden { display: none; }
+.inv { opacity: 0.01; }
+.vis { opacity: 1; }
+.helpers, .helpers canvas { position: absolute; left: 0; top: 0; width: 1024px; height: 768px; z-index: 3; }
+
+.loading {
+	background-position: 0 0;
+}
+
+.panel
+{
+	border: 1px solid #5277FF;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#systems
+{
+	position: absolute;
+	left: 5px;
+	top: 40px;
+	width: 250px;
+	height: 506px;
+}
+
+#events
+{
+	position: absolute;
+	left: 770px;
+	top: 40px;
+	width: 230px;
+	height: 506px;
+}
+
+input
+{
+	font-size: 10px;
+}
+select
+{
+	font-size: 10px;
+}
+
+#sondy
+{
+	position: absolute;
+	left: 260px;
+	top: 40px;
+	width: 500px;
+	height: 506px;
+
+}
+#output
+{
+	position: absolute;
+	left: 5px;
+	top: 550px;
+	width: 800px;
+	height: 80px;
+}
+
+#robot
+{
+	position: absolute;
+	left: 820px;
+	top: 620px;
+	height: 180px;
+}
+
+iframe
+{
+	height: 70px;
+	width: 100%;
+	border: none;
+}
+
+iframe.big
+{
+	height: 500px;
+}
+
+.Y
+{
+	background-color:#008800;
+}
+
+.N
+{
+	background-color:#880000;
+}
+
+.MIS
+{
+	background-color:#008800;
+}
+
+.ARM
+{
+	background-color:#880000;
+}
+.HOM
+{
+	background-color:#884400;
+}
+.RTN
+{
+	background-color:#000088;
+}
+.NIL
+{
+	background-color:#444444;
+}
+
+body.terminal {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+body.terminal #main {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	top: 0;
+	height: 100%;
+	background: #060606 url('./img/800x600_1.png') left top no-repeat;
+	overflow: hidden;
+}
+body.terminal #main.w1024 {
+	background: #060606 url('./img/1024x768_1.png') left top no-repeat;
+}
+
+body.terminal span.button {
+	position: absolute;
+	text-align: center;
+	overflow: hidden;
+}
+body.terminal #main.w800 #environment #keyboard .button.alphaNum:nth-of-type(11n+10) ~ .button.alphaNum
+ {
+	margin-top: 5px;
+}
+
+body.terminal #main.w800 #environment #keyboard .button.alphaNum:nth-of-type(20n+19) ~ .button.alphaNum
+ {
+	margin-top: 4px;
+}
+
+body.terminal #main.w800 #environment #keyboard .button.alphaNum:nth-of-type(29n+28) ~ .button.alphaNum
+ {
+	margin-top: 3px;
+}
+
+body.terminal #main.w1024 #keyboard span.button {
+	line-height: 86px !important;
+}
+
+body.terminal #main.w800 #environment #keyboard .button.alphaNum {
+	font-size: 2.7em;
+	line-height: 60px;
+	width: 58px !important;
+	height: 57px !important;
+	margin: 6px 0 0 1px;
+}
+body.terminal #main.w800 #environment.alien_linessymbol #keyboard .button.alphaNum {
+	font-size: 2.0em;
+}
+
+body.terminal #main.w800 #environment.anilloregular .button.alphaNum {
+	font-size: 2.3em !important;
+	line-height: 60px !important;
+}
+
+body.terminal #main.w800 #environment.silverstreamregular span.button {
+	line-height: 67px;
+}
+
+body.terminal #main.w800 #environment.silverstreamregular .button.alphaNum {
+	font-size: 1.8em !important;
+	line-height: 66px !important;
+}
+body.terminal #main.w800 #environment.omikron-webfont .button {
+	font-size: 1.8em;
+}
+
+body.terminal #cursor {
+	position: absolute;
+	left 0;
+	top: 0;
+	height: 0;
+	width: 0;
+	overflow: visible;
+}
+body.terminal #cursor span {
+	position: absolute;
+	left: -16px;
+	top: -16px;
+	height: 32px;
+	width: 32px;
+	background: url('img/cursor.gif') 0 0 no-repeat;
+}
