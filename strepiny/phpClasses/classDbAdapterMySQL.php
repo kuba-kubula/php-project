@@ -2,7 +2,8 @@
 class DbAdapterMySQL {
 
   private $connect;
-  
+  public  $prefix;
+
   public function __construct($dbServerHost, $dbUser, $dbPass, $dbSchema, $dbPrefix = '') {
     $this->connect = mysql_pconnect($dbServerHost, $dbUser, $dbPass) or die('Neni pristup na DB server.');
     $this->prefix = $dbPrefix;
