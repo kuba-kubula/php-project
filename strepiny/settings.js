@@ -33,7 +33,7 @@ var is1024 = (location.href.split('?').pop().split('&').pop().split('=').pop() =
 var settings = {
   'screen_width' : is1024 ? 1024 : 800,
   'screen_height' : is1024 ? 768 : 600,
-  'url' : "http://strepiny.larp/databaze.php",
+  'url' : "./databaze.php",
   'fontCount' : 4,
   'caps_size': 30,
   'text_size': 20,
