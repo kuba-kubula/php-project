@@ -27,7 +27,7 @@ function do_glitch() {
       cnvs[i].setAttribute('class', 'inv');
     }
     glitch(bdy, {
-      amount: getRandomInt(GLITCH_FORCE - 2, GLITCH_FORCE + 2),
+      amount: getRandomInt(GLITCH_FORCE - 1, GLITCH_FORCE + 1),
       proxy: false,
       complete: function(canvas) {
         if (!ended) {
