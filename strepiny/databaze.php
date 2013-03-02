@@ -11,7 +11,7 @@ $term = isset($_GET['term']) ? $_GET['term'] : 0;
 //$db->insert('strepiny_log',array('script'=>'databaze.php','data'=>implode(':',$_GET)));
 
 
-if (($term == 0) || ($uzivatel = $db->fetch1Assoc("SELECT * FROM strepiny_db_uzivatele WHERE (jmeno = \"" . addslashes($login) . "\") AND (heslo=\"" . addslashes($password) . "\")"))) {
+if (($term == 0) || ($uzivatel = $db->fetch1Assoc("SELECT * FROM ".$db->prefix."strepiny_db_uzivatele WHERE (jmeno = \"" . addslashes($login) . "\") AND (heslo=\"" . addslashes($password) . "\")"))) {
 
 	if ($term != 0) {
 		$db->insert('strepiny_log', array('script'=>'databaze.php','data'=>'Login: '.$login));
@@ -21,7 +21,7 @@ if (($term == 0) || ($uzivatel = $db->fetch1Assoc("SELECT * FROM strepiny_db_uzi
 		echo  'OK:'.$uzivatel["role"];
 	}
 	else {
-		$odpoved = $db->fetch1Assoc('SELECT * FROM strepiny_systemy WHERE id="'.$term.'"');
+		$odpoved = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_systemy WHERE id="'.$term.'"');
 		if ($odpoved['spusten'] == 'N') {
 			echo 'OFF';
 		}
@@ -29,12 +29,12 @@ if (($term == 0) || ($uzivatel = $db->fetch1Assoc("SELECT * FROM strepiny_db_uzi
 			if ($klic != 'STATUS') {
 				$db->insert('strepiny_log', array('script'=>'databaze.php','data' => $login.' provedl dotaz na '.$klic));
 			}
-			if ($odpoved = $db->fetch1Assoc('SELECT * FROM strepiny_db_obsah WHERE klic="'.addslashes($klic).'" ORDER BY priorita DESC;')) {
+			if ($odpoved = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_db_obsah WHERE klic="'.addslashes($klic).'" ORDER BY priorita DESC;')) {
 				if ($odpoved['odemceni'] == 'START') {
 					echo 'OK:'.$odpoved['obsah'];
 				}
 				else {
-					$udalost = $db->fetch1Assoc('SELECT * FROM strepiny_db_udalosti WHERE kod="'.addslashes($odpoved['odemceni']).'";');
+					$udalost = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_db_udalosti WHERE kod="'.addslashes($odpoved['odemceni']).'";');
 					if ($udalost['probehla'] == 'A') {
 						echo 'OK:'.$odpoved['obsah'];
 					}
@@ -66,7 +66,7 @@ else {
 		}
 
 		if ($klic == 'STATUS') {
-			$odpoved = $db->fetch1Assoc('SELECT * FROM strepiny_systemy WHERE id="'.$term.'";');
+			$odpoved = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_systemy WHERE id="'.$term.'";');
 			if ($odpoved['spusten'] == 'N') {
 				echo 'OFF';
 			}

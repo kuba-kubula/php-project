@@ -23,7 +23,7 @@ if ($go == 'Navrat') {
 }
 
 if ($go == 'Rearm') {
-  $sonda = $db->fetch1Assoc('SELECT * FROM strepiny_sondy WHERE id="'.$id.'";');
+  $sonda = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_sondy WHERE id="'.$id.'";');
   if ($sonda['slot1'] != $slot1 || $sonda['slot2'] != $slot2) {
     $db->update('strepiny_sondy',array('stav'=>'ARM','slot1'=>$slot1,'slot2'=>$slot2,'progres'=>0),'WHERE id="'.$id.'";');
     $db->insert('strepiny_log',array('script'=>'sonda.php','data'=>'Sonda '.$id.' prezbrojovana na '.$slot1.' + '.$slot2));
@@ -32,7 +32,7 @@ if ($go == 'Rearm') {
   exit;
 }
 
-$sonda=$db->fetch1Assoc('SELECT * FROM strepiny_sondy WHERE id="'.$id.'";');
+$sonda=$db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_sondy WHERE id="'.$id.'";');
 
 $slots = array(
   'NIL' => '- NIL -',

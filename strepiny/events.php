@@ -6,7 +6,7 @@
 
   if (isset($_GET['last'])) {
     $last = (int)$_GET['last'];
-    $events = $db->fetchAssoc("SELECT id, data FROM strepiny_log WHERE id > $last ORDER BY id ASC LIMIT 0,30");
+    $events = $db->fetchAssoc("SELECT id, data FROM ".$db->prefix."strepiny_log WHERE id > $last ORDER BY id ASC LIMIT 0,30");
     if ($events) {
       echo json_encode($events);
     }
@@ -26,7 +26,7 @@
 <body>
   <div id="eventwrapper">
 <?php
-$events = $db->fetchAssoc('SELECT * FROM strepiny_log ORDER BY id DESC LIMIT 0,30');
+$events = $db->fetchAssoc('SELECT * FROM '.$db->prefix.'strepiny_log ORDER BY id DESC LIMIT 0,30');
 echo mysql_error();
 $lastId = 0;
 foreach ($events as $event) {

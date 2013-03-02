@@ -17,7 +17,7 @@ include("svg/moloch.php");
 
 $sondymis = array();
 $sondyret = array();
-$sondyall = $db->fetchAssoc('SELECT * FROM strepiny_sondy');
+$sondyall = $db->fetchAssoc('SELECT * FROM '.$db->prefix.'strepiny_sondy');
 
 foreach ($sondyall as $sonda) {
   if ($sonda['stav'] == 'MIS') {

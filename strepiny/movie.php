@@ -1,11 +1,12 @@
 <?php
 require_once("_settings/settings.php");
+
 include("svg/hexagon.php");
 include("svg/moloch.php");
 
 $sondymis = array();
 $sondyret = array();
-$sondyall = $db->fetchAssoc('SELECT * FROM strepiny_sondy');
+$sondyall = $db->fetchAssoc('SELECT * FROM '.$db->prefix.'strepiny_sondy');
 
 $subscribe = md5(serialize($sondyall));
 
@@ -35,16 +36,14 @@ if (!XHR) { ?>
 <title>Moloch - Probe Situation</title>
 <link rel="stylesheet" type="text/css" href="strepiny.css" />
 
-<script type="text/javascript" src="jquery.min.js"></script>
-<script type="text/javascript" src="glitch/javascript/glitch/html2canvas.js"></script>
-<script type="text/javascript" src="glitch/javascript/glitch/glitch-lib.js"></script>
-<script type="text/javascript" src="glitch/javascript/glitch/glitch-execute.js"></script>
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script type="text/javascript" src="./glitch/javascript/glitch/html2canvas.js"></script>
+<script type="text/javascript" src="./glitch/javascript/glitch/glitch-lib.js"></script>
+<script type="text/javascript" src="./glitch/javascript/glitch/glitch-execute.js"></script>
 <style type="text/css">
   html, body { font-family: Omikron, omikron-webfont, sans-serif; }
 </style>
 </head>
-
-
 <body bgcolor="#0b0d0d" style="border: 0; margin: 0; padding: 0; overflow:hidden; font-family: Omikron, omikron-webfont, sans-serif;">
 <div class="projectionSvg">
 <div id="projection">
@@ -102,14 +101,14 @@ foreach($sondyall as $sonda) {
   if ($sonda['slot1'] == 'NIL') {
     $image = '';
   } else {
-    $image='<image x="-31" y="-35" width="62" height="70" xlink:href="img/'.$sonda['slot1'].'.png" />';
+    $image='<image x="-31" y="-35" width="62" height="70" xlink:href="./img/'.$sonda['slot1'].'.png" />';
   }
   largehexagon('#09f1bb',$image,-33,0);
   if ($sonda['slot2'] == 'NIL') {
     $image = '';
   }
   else {
-    $image='<image x="-31" y="-35" width="62" height="70" xlink:href="img/'.$sonda['slot2'].'.png" />';
+    $image='<image x="-31" y="-35" width="62" height="70" xlink:href="./img/'.$sonda['slot2'].'.png" />';
   }
   largehexagon('#09f1bb',$image,33,0);
 

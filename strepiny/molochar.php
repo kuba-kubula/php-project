@@ -2,7 +2,7 @@
 require_once("_settings/settings.php");
 include("svg/hexagon.php");
 
-$nestabilita = $db->fetch1Assoc('SELECT * FROM strepiny_nestabilita WHERE id="1";');
+$nestabilita = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_nestabilita WHERE id="1";');
 
 ?><!doctype html>
 <html>

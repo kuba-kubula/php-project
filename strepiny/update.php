@@ -7,9 +7,9 @@
 		require_once "_settings/json.php";
 	}
 
-$nestabilita = $db->fetch1Assoc('SELECT * FROM strepiny_nestabilita WHERE id = "1";');
-$systemy     = $db->fetchAssoc('SELECT * FROM strepiny_systemy WHERE spusten = "Y" ORDER BY id ASC');
-$sondyAll    = $db->fetchAssoc('SELECT * FROM strepiny_sondy ORDER BY id ASC');
+$nestabilita = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_nestabilita WHERE id = "1";');
+$systemy     = $db->fetchAssoc('SELECT * FROM '.$db->prefix.'strepiny_systemy WHERE spusten = "Y" ORDER BY id ASC');
+$sondyAll    = $db->fetchAssoc('SELECT * FROM '.$db->prefix.'strepiny_sondy ORDER BY id ASC');
 
 $sondyStats = array();
 $sondyarm = array();
@@ -68,7 +68,7 @@ foreach ($sondymis as $sondamis) {
 		$db->update('strepiny_sondy',array('stav'=>'RTN','progres'=>'100'),'WHERE id="'.$sonda['id'].'"');
 		$db->insert('strepiny_log',array('script'=>'update.php','data'=>'Probíhá objevení sektoru '.$sonda['cil'].' sondou '.$sonda['id']));
 
-		if ($molochSektor = $db->fetch1Assoc('SELECT * FROM strepiny_moloch WHERE cislo="'.$sonda['cil'].'"')) {
+		if ($molochSektor = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_moloch WHERE cislo="'.$sonda['cil'].'"')) {
 			if (($sonda['slot1'] == $molochSektor['prekazka']) || ($sonda['slot2'] == $molochSektor['prekazka']) || ($molochSektor['prekazka'] == 'EMPT')) {
 				if (($sonda['slot1'] == $molochSektor['zarizeni']) || ($sonda['slot2'] == $molochSektor['zarizeni'])) {
 					$db->insert('strepiny_log',array('script'=>'update.php','data'=>'Sonda vyzvedla sektor '.$sonda['cil']));
