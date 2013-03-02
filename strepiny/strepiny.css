@@ -1,12 +1,14 @@
 body {
 	color: #DDEEFF;
 	background-color: #020014;
-	font-size: 10px;
 	padding: 0px;
 	margin: 2px;
 	background-image: url('img/ajax-loader.gif');
 	background-repeat: no-repeat;
 	background-position: -50px -50px;
+	font-family: Arial, sans-serif;
+	font-size: 11px;
+	line-height: 125%;
 }
 
 @font-face {
@@ -19,9 +21,6 @@ body {
 	font-style: normal;
 }
 
-body {
-	font-size: 10px;
-}
 #environment {
 	position: absolute;
 	left: 0;
