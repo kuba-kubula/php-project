@@ -9,34 +9,21 @@
 <body>
   <h1>Střepiny - orží kontrolní panel</h1>
   <div class="panel" id="systems">
-   <iframe class="system" src="system.php?id=0">
-   </iframe>
-   <iframe class="system" src="system.php?id=1">
-   </iframe>
-   <iframe class="system" src="system.php?id=2">
-   </iframe>
-   <iframe class="system" src="system.php?id=3">
-   </iframe>
-   <iframe class="system" src="system.php?id=4">
-   </iframe>
-   <iframe class="system" src="system.php?id=5">
-   </iframe>
-   <iframe class="system" src="system.php?id=6">
-   </iframe>
+   <iframe class="system" src="system.php?id=0" scrolling="no"></iframe>
+   <iframe class="system" src="system.php?id=1" scrolling="no"></iframe>
+   <iframe class="system" src="system.php?id=2" scrolling="no"></iframe>
+   <iframe class="system" src="system.php?id=3" scrolling="no"></iframe>
+   <iframe class="system" src="system.php?id=4" scrolling="no"></iframe>
+   <iframe class="system" src="system.php?id=5" scrolling="no"></iframe>
+   <iframe class="system" src="system.php?id=6" scrolling="no"></iframe>
  </div>
  <div class="panel" id="sondy">
-   <iframe name="sonda1" id="sonda1" class="sonda" src="sonda.php?id=1">
-   </iframe>
-   <iframe name="sonda2" id="sonda2" class="sonda" src="sonda.php?id=2">
-   </iframe>
-   <iframe name="sonda3" id="sonda3" class="sonda" src="sonda.php?id=3">
-   </iframe>
-   <iframe name="sonda4" id="sonda4" class="sonda" src="sonda.php?id=4">
-   </iframe>
-   <iframe name="sonda5" id="sonda5" class="sonda" src="sonda.php?id=5">
-   </iframe>
-   <iframe name="sonda6" id="sonda6" class="sonda" src="sonda.php?id=6">
-   </iframe>
+   <iframe name="sonda1" id="sonda1" class="sonda" src="sonda.php?id=1" scrolling="no"></iframe>
+   <iframe name="sonda2" id="sonda2" class="sonda" src="sonda.php?id=2" scrolling="no"></iframe>
+   <iframe name="sonda3" id="sonda3" class="sonda" src="sonda.php?id=3" scrolling="no"></iframe>
+   <iframe name="sonda4" id="sonda4" class="sonda" src="sonda.php?id=4" scrolling="no"></iframe>
+   <iframe name="sonda5" id="sonda5" class="sonda" src="sonda.php?id=5" scrolling="no"></iframe>
+   <iframe name="sonda6" id="sonda6" class="sonda" src="sonda.php?id=6" scrolling="no"></iframe>
 
   </div>
   <div class="panel" id="output">

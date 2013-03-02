@@ -8,7 +8,7 @@ body {
 	background-position: -50px -50px;
 	font-family: Arial, sans-serif;
 	font-size: 11px;
-	line-height: 125%;
+	line-height: 110%;
 }
 
 @font-face {
@@ -243,6 +243,7 @@ img.tt { position: absolute; z-index: 4; }
 
 .panel
 {
+	font-family: Arial, sans-serif;
 	border: 1px solid #5277FF;
 	margin: 0px;
 	padding: 0px;

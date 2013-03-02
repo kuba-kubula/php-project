@@ -18,9 +18,9 @@
 ?>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="strepiny.css" />
 <meta http-equiv="refresh" content="600;URL='events.php">
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="strepiny.css" />
 <script type="text/javascript" src="jquery.min.js"></script>
 </head>
 <body>
