@@ -13,11 +13,10 @@ $term = isset($_GET['term']) ? $_GET['term'] : 0;
 
 if (($term == 0) || ($uzivatel = $db->fetch1Assoc("SELECT * FROM ".$db->prefix."strepiny_db_uzivatele WHERE (jmeno = \"" . addslashes($login) . "\") AND (heslo=\"" . addslashes($password) . "\")"))) {
 
-	if ($term != 0) {
-		$db->insert('strepiny_log', array('script'=>'databaze.php','data'=>'Login: '.$login));
-	}
-
 	if ($klic == 'ROLE') {
+		if ($term != 0) {
+			$db->insert('strepiny_log', array('script'=>'databaze.php','data'=>'Login: '.$login));
+		}
 		echo  'OK:'.$uzivatel["role"];
 	}
 	else {
@@ -54,13 +53,14 @@ else {
 		// $db->insert('strepiny_log',array('script'=>'databaze.php','data'=>'Login: '.$login));
 
 		if ($klic == 'ON') {
-			$db->update('strepiny_systemy', array('spusten'=>'Y'),'WHERE id="'.$term.'"');
-			$db->execute("UPDATE ".$db->prefix."strepiny_nestabilita AS nstblt, ".$db->prefix."strepiny_systemy AS sstm SET nstblt.nc = (nstblt.nc + sstm.ns) WHERE sstm.id = '".$term."';");
+			$db->insert('strepiny_log', array('script'=>'databaze.php','data'=>'Login: '.$login. " Zapnul Terminal ".$term));
+			$db->execute("UPDATE ".$db->prefix."strepiny_nestabilita AS nstblt, ".$db->prefix."strepiny_systemy AS sstm SET sstm.spusten = 'Y', nstblt.nc = (nstblt.nc + sstm.ns) WHERE sstm.id = '".$term."';");
 			echo 'OK:Terminal zapnut';
 			// $db->insert('strepiny_log',array('script'=>'databaze.php','data'=>'Terminal '.$term.' zapnut'));
 		}
 
 		if ($klic == 'OFF') {
+			$db->insert('strepiny_log', array('script'=>'databaze.php','data'=>'Login: '.$login. " Vypnul Terminal ".$term));
 			$db->update('strepiny_systemy',array('spusten'=>'N'),'WHERE id="'.$term.'"');
 			echo 'OK:Terminal vypnut';
 			// $db->insert('strepiny_log',array('script'=>'databaze.php','data'=>'Terminal '.$term.' vypnut'));
