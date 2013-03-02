@@ -59,7 +59,6 @@ function lockPointer() {
   // Ask the browser to lock the pointer
   if (requestPointerLock) {
     requestPointerLock.apply( element );
-    setTimeout(handleMouseMoveClick, 3000);
   }
   else {
     alert('Lock Pointer API not found, use latest version of Chrome or Firefox!');
@@ -275,7 +274,7 @@ function confirmName (input) {
  * Control if the user has the access rights - currently take both DENIED and NOT and OK, but sth else should be put here.
  */
 function confirmPass (input) {
-  environment.password = input;
+  environment.setPass(input);
   data.el.empty();
   http.findEntry("ROLE", function (err, valid) {
     if (err) {
@@ -332,7 +331,8 @@ var EnvironmentClass = function (options) {
       screen_type: -1,
       user_name: "",
       password: "",
-      on_line: true
+      on_line: -1,
+      started: false
     };
   }
 
@@ -341,18 +341,21 @@ var EnvironmentClass = function (options) {
       this[i] = options[i];
     }
   }
-  this.el.parent().addClass('w' + settings.screen_width);
-  this.start();
 };
 
 EnvironmentClass.prototype.start = function () {
+  if (this.started) {
+    return;
+  }
+  this.started = true;
+  this.el.parent().addClass('w' + settings.screen_width);
   if (settings.illegal) {
     this.setScreen(TEXT_SCREEN);
-    data.prepend(settings.illegal_welcome);
+    this.data.prepend(settings.illegal_welcome);
   }
   else {
     this.setScreen(NAME_SCREEN);
-    data.prepend(settings.username);
+    this.data.prepend(settings.username);
   }
 };
 
@@ -374,7 +377,7 @@ EnvironmentClass.prototype.getPass = function () {
 
 EnvironmentClass.prototype.setScreen = function (new_screen) {
   if (this.screen_type != new_screen) {
-    data.el.empty();
+    this.data.el.empty();
     this.screen_type = new_screen;
   }
 };
@@ -391,7 +394,8 @@ EnvironmentClass.prototype.setFont = function (fontName) {
 var AjaxClass = function (options) {
   if (!options) {
     options = {
-      url: window.settings.url
+      url: window.settings.url,
+      started: false
     };
   }
   for (i in options) {
@@ -399,7 +403,17 @@ var AjaxClass = function (options) {
       this[i] = options[i];
     }
   }
+};
+
+AjaxClass.prototype.start = function () {
+  if (this.started) {
+    return;
+  }
+  this.started = true;
   setInterval($.proxy(this.check, this), 10000);
+  if (!settings.illegal) {
+    this.check();
+  }
 };
 
 AjaxClass.prototype.findEntry = function (keyword, cb) {
@@ -410,7 +424,7 @@ AjaxClass.prototype.findEntry = function (keyword, cb) {
   this.running = true;
   var that = this;
 
-  this.buildQuery(keyword, environment.getAccountName(), environment.getPass(), $.proxy(function(err, res) {
+  this.buildQuery(keyword, this.environment.getAccountName(), this.environment.getPass(), $.proxy(function(err, res) {
     this.running = false;
   }, this), $.proxy(function (err, res) {
     cb(err, res);
@@ -420,6 +434,7 @@ AjaxClass.prototype.findEntry = function (keyword, cb) {
 AjaxClass.prototype.buildQuery = function (keyword, login, pass, complete, callback) {
   $.ajax({
     url: this.url, type: 'GET', dataType: 'text', timeout: 5000,
+    cache: false,
     data: {
       'term':     "" + settings.ID + "",
       'klic':     "" + keyword + "",
@@ -436,11 +451,24 @@ AjaxClass.prototype.buildQuery = function (keyword, login, pass, complete, callb
   });
 };
 
-AjaxClass.prototype.afterCheck = function () {
-  if (environment.on_line || settings.illegal) {
-    $('body.terminal #main').css('backgroundImage', 'url("img/' + (settings.screen_width) + 'x' + (settings.screen_height) + '_1.png")');
-  } else {
-    $('body.terminal #main').css('backgroundImage', 'url("img/' + (settings.screen_width) + 'x' + (settings.screen_height) + '_off.png")');
+AjaxClass.prototype.afterCheck = function (newStatus) {
+  var $el = $('body.terminal #main');
+  var $bg = $el.css('backgroundImage');
+  var oldIsOnLine = $bg.indexOf('_off') > -1 ? false : true;
+  var setWhat = false;
+
+  if (settings.illegal) {
+    if (!oldIsOnLine) {
+      this.environment.on_line = true;
+      setWhat = '_1';
+    }
+  }
+  else if (newStatus !== this.environment.on_line) {
+    setWhat = newStatus ? '_1' : '_off';
+  }
+
+  if (setWhat !== false) {
+    $('body.terminal #main').css('backgroundImage', 'url("img/' + (settings.screen_width) + 'x' + (settings.screen_height) + setWhat + '.png")');
   }
 };
 
@@ -448,11 +476,10 @@ AjaxClass.prototype.check = function () {
   this.buildQuery("STATUS", "MAINTENANCE", "INSECURITY", function () {
   }, $.proxy(function (err, results) {
     if (err) {
-      data.prepend('Chyba spojeni s databazi. Opakujte dotaz znovu.\n');
-      data.setError();
+      this.data.prepend('Chyba spojeni s databazi. Opakujte dotaz znovu.\n');
+      this.data.setError();
     }
-    environment.on_line = /ON/.test(results.replace('\n',' '));
-    this.afterCheck();
+    this.afterCheck(/ON/.test(results.replace('\n',' ')));
   }, this));
 };
 
@@ -461,7 +488,8 @@ DataClass = function (options) {
     options = {
       el: $('#inputLine'),
       dt: $('#dta'),
-      errorState: false
+      errorState: false,
+      started: false
     };
   }
   for (i in options) {
@@ -469,6 +497,12 @@ DataClass = function (options) {
       this[i] = options[i];
     }
   }
+};
+DataClass.prototype.start = function () {
+  if (this.started) {
+    return;
+  }
+  this.started = true;
   this.setupDtaSize();
 };
 DataClass.prototype.empty = function () {

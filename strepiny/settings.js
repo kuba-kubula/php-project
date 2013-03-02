@@ -31,12 +31,14 @@ var Settings = function () {
 }
 var is1024 = (location.href.split('?').pop().split('&').pop().split('=').pop() == '1024' ? true : false);
 var settings = {
+  'on_line': false,
   'screen_width' : is1024 ? 1024 : 800,
   'screen_height' : is1024 ? 768 : 600,
   'url' : "./databaze.php",
   'fontCount' : 4,
   'caps_size': 30,
   'text_size': 20,
+  'defaultFont': 'BDI',
   'font' : {
     "Navarenssis" : "alien_linessymbol",
     "BDI"         : "omikron-webfont",

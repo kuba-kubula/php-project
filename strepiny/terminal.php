@@ -73,7 +73,20 @@ data        = new DataClass();
 environment = new EnvironmentClass();
 http        = new AjaxClass();
 
-environment.setFont('Exarchos');
+environment.data = data;
+environment.http = http;
+
+data.http        = http;
+data.environment = environment;
+
+http.data        = data;
+http.environment = environment;
+
+data.start();
+http.start();
+environment.start();
+
+environment.setFont(settings.defaultFont);
 
 window.oncontextmenu = function(event) {
   event.preventDefault();
