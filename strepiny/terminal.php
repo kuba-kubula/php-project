@@ -44,7 +44,7 @@ Vyberte nize:<br />
 <html>
 <head>
   <meta name="charset" content="utf-8" />
-  <title>Terminál</title>
+  <title>Terminal</title>
   <link rel="stylesheet" href="strepiny.css" />
   <script src="jquery.min.js"></script>
   <script src="settings.js"></script>
@@ -54,15 +54,15 @@ Vyberte nize:<br />
 </style>
 </head>
 <body class="terminal">
-<div id="main"><div id="environment">
-  <div id="inputLine"></div>
-  <div id="dta"><div></div></div>
-  <div id="cursor"><span></span></div>
-  <div id="status">
-    <div id="keyboard">
-    </div>
+<div id="main">
+  <div id="environment">
+    <div id="termbg" class="online"></div>
+    <div id="inputLine"></div>
+    <div id="dta"><div></div></div>
+    <div id="keyboard"></div>
+    <div id="cursor"><span></span></div>
   </div>
-</div></div>
+</div>
 <script type="text/javascript">
   document.addEventListener( 'keydown', onDocumentKeyDown, false );
 </script>

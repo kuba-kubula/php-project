@@ -50,18 +50,19 @@ if (($term == 0) || ($uzivatel = $db->fetch1Assoc("SELECT * FROM ".$db->prefix."
 	}
 }
 else {
-	if (($login == "MAINTENANCE") && ($password == "INSECURITY")) {
+	if (($login == "MAINTENANCE") && ($password == "INSECURITY") || ($login == "S3RV1S") && ($password == "D8")) {
 		// $db->insert('strepiny_log',array('script'=>'databaze.php','data'=>'Login: '.$login));
 
 		if ($klic == 'ON') {
 			$db->update('strepiny_systemy', array('spusten'=>'Y'),'WHERE id="'.$term.'"');
-			echo 'OK: Terminal zapnut';
+			$db->execute("UPDATE ".$db->prefix."strepiny_nestabilita AS nstblt, ".$db->prefix."strepiny_systemy AS sstm SET nstblt.nc = (nstblt.nc + sstm.ns) WHERE sstm.id = '".$term."';");
+			echo 'OK:Terminal zapnut';
 			// $db->insert('strepiny_log',array('script'=>'databaze.php','data'=>'Terminal '.$term.' zapnut'));
 		}
 
 		if ($klic == 'OFF') {
 			$db->update('strepiny_systemy',array('spusten'=>'N'),'WHERE id="'.$term.'"');
-			echo 'OK: Terminal vypnut';
+			echo 'OK:Terminal vypnut';
 			// $db->insert('strepiny_log',array('script'=>'databaze.php','data'=>'Terminal '.$term.' vypnut'));
 		}
 
@@ -75,7 +76,7 @@ else {
 			}
 		}
 		if (!(($klic == 'ON') || ($klic == 'OFF') || ($klic  == 'STATUS'))) {
-			echo 'OK: Ukolem udrzby je pouze zapinat a vypinat terminal';
+			echo 'OK:Ukolem udrzby je pouze zapinat a vypinat terminal';
 		}
 
 	}

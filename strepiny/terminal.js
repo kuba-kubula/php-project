@@ -276,6 +276,11 @@ function confirmName (input) {
 function confirmPass (input) {
   environment.setPass(input);
   data.el.empty();
+  if (environment.engineerAccess()) {
+    environment.setScreen(TEXT_SCREEN);
+    data.prepend(settings.engineer);
+    return;
+  }
   http.findEntry("ROLE", function (err, valid) {
     if (err) {
       data.prepend('Chyba spojeni s databazi. Opakujte dotaz znovu.');
@@ -299,12 +304,18 @@ function confirmPass (input) {
  * Called when the user confirms the search of the input. The input keyed data are requested from the server and then stored in the output string.
  */
 function searchText (input) {
+  if (environment.engineerAccess() && input == 'OFF') {
+    http.afterCheck(false);
+  }
+  if (environment.engineerAccess() && input == 'ON') {
+    http.afterCheck(true);
+  }
   http.findEntry(input, function (err, res) {
     if (err) {
       data.prepend('Chyba spojeni s databazi. Opakujte dotaz znovu.\n');
       return;
     }
-    res = res.replace('\n', ' ');
+    res = res.replace('\n', ' ').replace(/\s{2,}/g, ' ');
     if (/^OK/.test(res)) {
       data.el.empty();
       data.prepend(input + ": " + res.substring(3) + '\n');
@@ -389,6 +400,9 @@ EnvironmentClass.prototype.getScreen = function () {
 EnvironmentClass.prototype.setFont = function (fontName) {
   this.el.attr('class', settings.font[fontName]);
 };
+EnvironmentClass.prototype.engineerAccess = function () {
+  return (environment.getAccountName() == 'MAINTENANCE' && environment.getPass() == 'INSECURITY') || (environment.getAccountName() == 'S3RV1S' && environment.getPass() == 'D8')
+}
 
 
 var AjaxClass = function (options) {
@@ -452,23 +466,22 @@ AjaxClass.prototype.buildQuery = function (keyword, login, pass, complete, callb
 };
 
 AjaxClass.prototype.afterCheck = function (newStatus) {
-  var $el = $('body.terminal #main');
-  var $bg = $el.css('backgroundImage');
-  var oldIsOnLine = $bg.indexOf('_off') > -1 ? false : true;
+  var $el = $('body.terminal #termbg');
+  var oldIsOnLine = $el.hasClass('online');
   var setWhat = false;
 
   if (settings.illegal) {
     if (!oldIsOnLine) {
       this.environment.on_line = true;
-      setWhat = '_1';
+      setWhat = 'online';
     }
   }
-  else if (newStatus !== this.environment.on_line) {
-    setWhat = newStatus ? '_1' : '_off';
+  else if (newStatus !== oldIsOnLine) {
+    setWhat = newStatus ? 'online' : 'offline';
   }
 
   if (setWhat !== false) {
-    $('body.terminal #main').css('backgroundImage', 'url("img/' + (settings.screen_width) + 'x' + (settings.screen_height) + setWhat + '.png")');
+    $el.attr('class', setWhat);
   }
 };
 

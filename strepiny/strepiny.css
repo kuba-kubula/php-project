@@ -23,9 +23,16 @@ body {
 	font-size: 10px;
 }
 #environment {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
 	font-size: 1.8em;
 	color: rgb(0, 255, 255);
 }
+
 #environment #keyboard .button {
 	font-size: 1.3em;
 	color: rgb(9, 241, 187);
@@ -128,6 +135,7 @@ body {
 	text-indent: 2px;
 	position: absolute;
 	text-overflow: ellipsis;
+	z-index: 2;
 }
 #environment.alien_linessymbol #inputLine {
 	font-size: 1.2em;
@@ -145,6 +153,7 @@ body {
 	line-height: 20px;
 }
 #environment #dta {
+	z-index: 3;
 	pointer-events: none;
 	position: absolute;
 	-webkit-box-sizing: border-box;
@@ -345,17 +354,44 @@ body.terminal {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 }
+body.terminal #keyboard {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 8;
+	overflow: visible;
+}
+body.terminal #termbg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background: url('./img/800x600_1.png') left top no-repeat;
+}
+body.terminal #main.w1024 #termbg {
+	background: url('./img/1024x768_1.png') left top no-repeat;
+}
+
 body.terminal #main {
 	position: absolute;
 	left: 0;
 	width: 100%;
 	top: 0;
 	height: 100%;
-	background: #060606 url('./img/800x600_1.png') left top no-repeat;
+	background: #060606 url('./img/800x600_off.png') left top no-repeat;
 	overflow: hidden;
 }
 body.terminal #main.w1024 {
-	background: #060606 url('./img/1024x768_1.png') left top no-repeat;
+	background: #060606 url('./img/1024x768_off.png') left top no-repeat;
+}
+
+body.terminal #main #termbg.offline {
+	background-position: -1200px -1000px;
+}
+body.terminal #main #termbg.online {
+	background-position: 0 0;
 }
 
 body.terminal span.button {
@@ -417,6 +453,7 @@ body.terminal #cursor {
 	height: 0;
 	width: 0;
 	overflow: visible;
+	z-index: 10;
 }
 body.terminal #cursor span {
 	position: absolute;

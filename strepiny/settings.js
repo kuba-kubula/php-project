@@ -40,34 +40,35 @@ var settings = {
   'text_size': 20,
   'defaultFont': 'BDI',
   'font' : {
-    "Navarenssis" : "alien_linessymbol",
-    "BDI"         : "omikron-webfont",
-    "Exarchos"    : "anilloregular",
-    "Belliger"    : "silverstreamregular"
+    "Navarenssis"   : "alien_linessymbol",
+    "BDI"           : "omikron-webfont",
+    "Exarchos"      : "anilloregular",
+    "Belliger"      : "silverstreamregular"
   },
   'color': {
-    "background" : "rgba(20,65,20,0.5)",
-    "field"      : "rgba(255,255,255,0)",
-    "text"       : "rgba(0,255,255,1)",
-    "caption"    : "rgba(9,241,187,1)",
-    "highlight"  : "rgba(80,160,190,1)",
-    "offline"    : "rgba(80,160,190,1)",
-    "error"      : "rgba(150,0,0,1)"
+    "background"    : "rgba(20,65,20,0.5)",
+    "field"         : "rgba(255,255,255,0)",
+    "text"          : "rgba(0,255,255,1)",
+    "caption"       : "rgba(9,241,187,1)",
+    "highlight"     : "rgba(80,160,190,1)",
+    "offline"       : "rgba(80,160,190,1)",
+    "error"         : "rgba(150,0,0,1)"
   },
-  "emptyinput"  : "Vstupni pole je prazdne. Ignoruji.\n",
-  "username"    : "Zadejte uzivatelske jmeno.\n",
-  "password"    : "Zadejte heslo k uctu %1$s.\n",
-  "wronglogin"  : "Neplatne uzivatelske jmeno nebo heslo. Opakujte zadani jmena.\n",
-  "welcome"     : "Vitejte uzivateli %1$s.\n",
+  "emptyinput"      : "Vstupni pole je prazdne. Ignoruji.\n",
+  "username"        : "Zadejte uzivatelske jmeno.\n",
+  "password"        : "Zadejte heslo k uctu %1$s.\n",
+  "wronglogin"      : "Neplatne uzivatelske jmeno nebo heslo. Opakujte zadani jmena.\n",
+  "welcome"         : "Vitejte uzivateli %1$s.\n",
   "illegal_welcome" : "Vitejte uzivateli ... CHYBA! UZIVATELSKY UCET NEPLATNY, NEOPRAVNENY PRISTUP JE TRESTNY!\n",
-  "prompt"      : "Pro odhlaseni zadejte EXIT a potvrdte. Pro vyhledavani zadejte heslo a potvrdte.\n",
-  "outofbounds" : "Prekrocena delka vstupniho pole.\n",
-  "off"         : "Spojeni s databazi je v tuto chvili vypnute.\n",
-  "denied"      : "K zobrazeni tohoto hesla nemate dostatecne pravomoce.\n",
-  "notfound"    : "Heslo nebylo nalezeno v databazi.\n",
-  "corrupted"   : "Heslo je v tuto chvili nedostupne.\n",
-  "logoffreset" : "Uzivatel odhlasen. Zadejte uzivatelske jmeno.\n",
-  "illegal_logoff" : "CHYBA ODPOJENI. NEOPRAVNENE UZIVANI TERMINALU JE TRESTNE!\n"
+  "prompt"          : "Pro odhlaseni zadejte EXIT a potvrdte. Pro vyhledavani zadejte heslo a potvrdte.\n",
+  "outofbounds"     : "Prekrocena delka vstupniho pole.\n",
+  "off"             : "Spojeni s databazi je v tuto chvili vypnute.\n",
+  "denied"          : "K zobrazeni tohoto hesla nemate dostatecne pravomoce.\n",
+  "notfound"        : "Heslo nebylo nalezeno v databazi.\n",
+  "corrupted"       : "Heslo je v tuto chvili nedostupne.\n",
+  "logoffreset"     : "Uzivatel odhlasen. Zadejte uzivatelske jmeno.\n",
+  "illegal_logoff"  : "CHYBA ODPOJENI. NEOPRAVNENE UZIVANI TERMINALU JE TRESTNE!\n",
+  "engineer"        : "Servisni pristup povolen. Pouzijte jeden z techto 3 prikazu: STATUS - OFF - ON\n"
 }
 
   width_ = settings.screen_width;
