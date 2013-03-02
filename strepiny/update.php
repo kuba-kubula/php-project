@@ -8,6 +8,7 @@
 	}
 
 $nestabilita = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_nestabilita WHERE id = "1";');
+
 $systemy     = $db->fetchAssoc('SELECT * FROM '.$db->prefix.'strepiny_systemy WHERE spusten = "Y" ORDER BY id ASC');
 $sondyAll    = $db->fetchAssoc('SELECT * FROM '.$db->prefix.'strepiny_sondy ORDER BY id ASC');
 
@@ -217,6 +218,8 @@ $sondyStats = array_map('sterilize', $sondyStats);
 $sondyStats = array_values($sondyStats);
 ksort($sondyStats);
 
+$nstblt = array_map('sterilize', array(0 => $nestabilita));
+$nstblt = $nstblt[0];
 // Volam VVVcka
 
 ?><!DOCTYPE html>
@@ -231,6 +234,7 @@ ksort($sondyStats);
 if (window.parent) {
 	try {
 		window.parent.callUpdates('<?php echo json_encode($sondyStats); ?>');
+		window.parent.updateNc('<?php echo json_encode($nstblt); ?>');
 	}
 	catch (e) {
 	}

@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+require_once("_settings/settings.php");
+$nestabilita = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_nestabilita WHERE id="1";');
+header("content-type:text/html");
+?>
+<!doctype html>
 <html>
 <head>
   <title>Střepiny - orží kontrolní panel</title>
@@ -30,17 +35,41 @@
    <iframe src="update.php?robot=true"></iframe>
   </div>
   <div class="panel" id="events">
-   <iframe src="events.php" class="big"></iframe>
+    <iframe src="events.php" class="big"></iframe>
+    <div class="updateVars">
+      <?php
+        $overrides = array('glitch' => "Glitch", 'nc' => "Nestabilita", 'ending' => 'Ending');
+        foreach($overrides as $k => $v) :
+      ?>
+       <form action="updateVariable.php" method="post" class="var_<?= $k; ?>">
+         <span><?= $v; ?>:</span> <input type="hidden" name="varname" value="<?= $k; ?>" />
+         <input class="inn" size="2" type="text" name="varvalue" value="<?= $nestabilita[$k] ?>" />
+         <button type="submit">Update <?= $k; ?></button>
+       </form>
+      <?php endforeach; ?>
+    </div>
   </div>
 
 <script type="text/javascript">
 var runForFirst = true;
+var updateNc = function(nc) {
+  nc = JSON.parse(nc);
+  $.each(nc, function (key, val) {
+    if (isNaN(key)) {
+      var $el = $('form.var_' + key);
+      if ($el && $el.length > 0) {
+        $el.find('input[name="varvalue"]').val(val);
+      }
+    }
+  });
+};
+
 var callUpdates = function(data) {
   if (runForFirst) {
     runForFirst = false;
     return true;
   }
-  data = JSON.parse(data);
+  var data = JSON.parse(data);
   for (var ii = 0, len = data.length; ii < len; ii++) {
     var d = data[ii];
     var f;
@@ -57,6 +86,23 @@ var callUpdates = function(data) {
     }
   };
 }
+
+$('.updateVars form').submit(function(e){
+  e.preventDefault();
+  e.stopPropagation();
+  e = $(this);
+  e.addClass('sending');
+  $.ajax({
+    url: e.attr('action'),
+    type: 'POST',
+    timeout: 3000,
+    dataType: 'text',
+    data: e.serialize(),
+    complete: function () {
+      e.removeClass('sending');
+    }
+  });
+});
 </script>
 </body>
 </html>

@@ -241,6 +241,22 @@ img.tt { position: absolute; z-index: 4; }
 	background-position: 0 0;
 }
 
+.updateVars {
+	padding-top: 7px;
+}
+.updateVars form {
+	background-image: url('img/ajax-loader.gif');
+	background-repeat: no-repeat;
+	background-position: -50px -50px;
+}
+.updateVars form.sending {
+	background-position: left center;
+}
+.updateVars form span {
+	display: inline-block;
+	width: 80px;
+	text-align: right;
+}
 .panel
 {
 	font-family: Arial, sans-serif;
@@ -265,7 +281,7 @@ img.tt { position: absolute; z-index: 4; }
 	left: 770px;
 	top: 40px;
 	width: 230px;
-	height: 506px;
+	height: 480px;
 }
 
 input
@@ -291,7 +307,7 @@ select
 	position: absolute;
 	left: 5px;
 	top: 550px;
-	width: 800px;
+	width: 750px;
 	height: 80px;
 }
 
@@ -312,7 +328,7 @@ iframe
 
 iframe.big
 {
-	height: 500px;
+	height: 480px;
 }
 
 .Y
