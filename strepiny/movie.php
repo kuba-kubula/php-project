@@ -7,6 +7,7 @@ include("svg/moloch.php");
 $sondymis = array();
 $sondyret = array();
 $sondyall = $db->fetchAssoc('SELECT * FROM '.$db->prefix.'strepiny_sondy');
+$nestabilita = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_nestabilita WHERE id="1";');
 
 $subscribe = md5(serialize($sondyall));
 
@@ -18,6 +19,8 @@ foreach ($sondyall as $sonda) {
     $sondyret[] = $sonda;
   }
 }
+
+header("X-GLITCH_FORCE: ".(isset($nestabilita['glitch']) ? $nestabilita['glitch'] : 5));
 
 if (isset($_GET['xhr'])) {
   define("XHR", true);
@@ -258,7 +261,14 @@ var initMovie = function () {
         lastId: svg.getAttribute('id')
       },
       dataType: 'text',
+      cache: false,
       timeout: 5000,
+      complete: function (jqXHR) {
+        var n;
+        if (n = jqXHR.getResponseHeader('X-GLITCH_FORCE')) {
+          GLITCH_FORCE = parseInt(n, 10);
+        }
+      },
       error: function () {
         setTimeout(cycleRoller, 2000);
       },
@@ -280,6 +290,7 @@ var initMovie = function () {
 canvasWrk.width  = canvasFin.width  = canvasTmp.width  = svg.getAttribute('width') * 1;
 canvasWrk.height = canvasFin.height = canvasTmp.height = svg.getAttribute('height') * 1;
 
+window.GLITCH_FORCE = <?= intval($nestabilita['glitch']); ?>;
 window.onload = cycleRoller;
 
 </script>
