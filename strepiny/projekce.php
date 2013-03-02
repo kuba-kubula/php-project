@@ -5,24 +5,14 @@ include("svg/hexagon.php");
 
 ?>
 <html>
-  <head>
-    <meta charset="UTF-8">
+<head>
+  <meta charset="UTF-8" />
 <?php echo ($_GET["robot"]=='true')?'<meta http-equiv="refresh" content="'.$robotTime.'">':''; ?>
-    <title>Moloch - Probe Situation</title>
-    <link rel="stylesheet" type="text/css" href="strepiny.css">
-
-    <script type="text/javascript" src="glitch/javascript/glitch/html2canvas.js"></script>
-    <script type="text/javascript" src="glitch/javascript/glitch/glitch-lib.js"></script>
-    <script type="text/javascript" src="glitch/javascript/glitch/glitch-execute.js"></script>
-
-   </head>
-
-
-   <body bgcolor="#0b0d0d" style="border: 0; margin: 0; padding: 0; overflow:hidden; font-family: Omikron, omikron-webfont, sans-serif;"><div id="projection">
-     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="768" width="1024" style="border:none; margin:0; padding:0;">
-     <g transform="translate (512, 384)">
-
-<?php
+<title>Moloch - Probe Situation</title>
+  <link rel="stylesheet" type="text/css" href="strepiny.css" />
+</head>
+<body bgcolor="#0b0d0d" style="border: 0; margin: 0; padding: 0; overflow:hidden; font-family: Omikron, omikron-webfont, sans-serif;"><div id="projection"><div id="canvasFin">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="768" width="1024" style="border:none; margin:0; padding:0;"><g transform="translate (512, 384)"><?php
 include("svg/moloch.php");
 
 $sondymis = array();
@@ -56,11 +46,7 @@ foreach($sondyret as $sondaret) {
 
 }
 
-?>
-</g>
-
-
-<?php
+?></g><?php
 
 foreach($sondyall as $sonda) {
 
@@ -113,8 +99,8 @@ foreach($sondyall as $sonda) {
   smallhexagon($color, $sonda['id'], 512 - 16 + (($sonda['id'] - 3) * 34), 142);
 }
 
-?>
-    </svg>
-   </div></body>
+?></svg>
+</div></div>
+ </body>
 </head>
 </html>
