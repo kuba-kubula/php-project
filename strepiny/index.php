@@ -29,6 +29,8 @@ header("content-type:text/html");
    <iframe name="sonda4" id="sonda4" class="sonda" src="sonda.php?id=4" scrolling="no"></iframe>
    <iframe name="sonda5" id="sonda5" class="sonda" src="sonda.php?id=5" scrolling="no"></iframe>
    <iframe name="sonda6" id="sonda6" class="sonda" src="sonda.php?id=6" scrolling="no"></iframe>
+   <iframe class="system" src="system.php?id=7">
+   </iframe>
 
   </div>
   <div class="panel" id="output">
@@ -69,7 +71,7 @@ var callUpdates = function(data) {
     runForFirst = false;
     return true;
   }
-  var data = JSON.parse(data);
+  data = JSON.parse(data);
   for (var ii = 0, len = data.length; ii < len; ii++) {
     var d = data[ii];
     var f;

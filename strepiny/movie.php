@@ -56,8 +56,16 @@ if (!XHR) { ?>
 }
 
 if (XHR && isset($_GET['lastId'])) {
-  if ($_GET['lastId'] == "id".$subscribe) {
-    die("0");
+  if (isset($_GET['over']) || $nestabilita['vyrazeno'] == 'Y' || $nestabilita['ending'] == 1) {
+    if ($nestabilita['ending'] == 1) {
+      die("theend");
+    } else {
+      die("instability");
+    }
+  } else {
+    if ($_GET['lastId'] == "id".$subscribe) {
+      die("0");
+    }
   }
 }
 
@@ -149,7 +157,7 @@ foreach($sondyall as $sonda) {
 
 ?></svg>
 <?php
-if (isset($_GET['xhr'])) {
+if (XHR) {
   // when through XHR, end here
   exit;
 }
@@ -176,7 +184,6 @@ var loadedImgs = function() {
     ctxWrk.drawImage(canvasFin, 0, 0);
     canvasWrk.className = 'vis';
   }
-
 
   setTimeout(function () {
 
@@ -273,7 +280,9 @@ var initMovie = function () {
         setTimeout(cycleRoller, 2000);
       },
       success: function (responseText) {
-        if (responseText != '0' && responseText != '1' && responseText != '2') {
+        if (responseText != '0' && responseText != 'theend' && responseText != 'instability') {
+          $('#theend').addClass('hidden');
+          $('#instability').addClass('hidden');
           var $el = $('svg:first');
           $el.after($(responseText));
           $el.remove();
@@ -281,6 +290,20 @@ var initMovie = function () {
           prepareImages();
         }
         else {
+          switch (responseText) {
+            case "theend":
+              $('#theend').removeClass('hidden');
+              $('#instability').addClass('hidden');
+            break;
+            case "instability":
+              $('#theend').addClass('hidden');
+              $('#instability').removeClass('hidden');
+            break;
+            default:
+              $('#theend').addClass('hidden');
+              $('#instability').addClass('hidden');
+            break;
+          }
         }
       }
     });
@@ -294,6 +317,13 @@ window.GLITCH_FORCE = <?= intval($nestabilita['glitch']); ?>;
 window.onload = cycleRoller;
 
 </script>
+
+<div id="theend" class="hidden">
+  <center style="padding-top:150px;line-height:140px;font-size:100px;">This is<br /><span style="font-size:160px">THE END</span></center>
+</div>
+<div id="instability" class="hidden">
+  <center style="padding-top:200px;line-height:100px;font-size:80px;">All systems <span style="color:red">offline</span><br />Reactor <span style="color:red">overheated</span>!</center>
+</div>
 
 </body>
 </html>

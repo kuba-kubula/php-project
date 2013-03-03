@@ -479,3 +479,15 @@ body.terminal #cursor span {
 	width: 32px;
 	background: url('img/cursor.gif') 0 0 no-repeat;
 }
+
+#instability, #theend {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 99;
+	height: 100%;
+	overflow: hidden;
+	background: #060606;
+	color: #0ff;
+}

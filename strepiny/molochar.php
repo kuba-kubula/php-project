@@ -8,19 +8,19 @@ $nestabilita = $db->fetch1Assoc('SELECT * FROM '.$db->prefix.'strepiny_nestabili
 <html>
 <head>
   <meta charset="UTF-8" />
-<?php echo (isset($_GET["robot"]) && $_GET['robot'] == 'true') ? '<meta http-equiv="refresh" content="'.$robotTime.'">' : ''; ?>
-  <link rel="stylesheet" href="strepiny.css" />
+<?php echo (isset($_GET["robot"]) && $_GET['robot'] == 'true')?'<meta http-equiv="refresh" content="'.$robotTime.'">':''; ?>
+  <link rel="stylesheet" type="text/css" href="strepiny.css">
   <title>Nestabilita jadra</title>
 </head>
 
 <body bgcolor="#0b0d0d" style="border: 0; margin: 0; padding: 0; overflow:hidden; font-family:Omikron, omikron-webfont; font-size:100px; color:white;">
 <center>
-celkova nestabilita<br />
+<br />celkova nestabilita<br />
 <?php echo $nestabilita['nc']; ?><br/>
 odber energie<br />
 <?php echo 100+$nestabilita['dnc']; ?>%
 </center>
 
-   </body>
+</body>
 </head>
 </html>
