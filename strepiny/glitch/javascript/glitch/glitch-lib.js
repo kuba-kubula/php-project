@@ -45,7 +45,7 @@
 	var _glitch = function(canvas, amount) {
 		var
 			// cache the width and height of the canvas locally
-			x, y, w = canvas.width, h = canvas.height,
+			x, y, w = canvas.width, h = canvas.height, _internal, w8, w4,
 
 			// _len is an iterator limit, initially storing the number of slices
 			// to create
@@ -114,15 +114,27 @@
 		// so, by initializing `i` to a random number between 0 and 2,
 		// and incrementing by 4 on each iteration, we can replace only
 		// a single channel in the image
-		for(i = getRandInt(0, 3), _len = srcData.length; i < _len; i += 4) {
+		_internal = getRandInt(0, 3);
+		_len = srcData.length;
+		for(i = _internal; i < _len; i += 4) {
 			data[i+channelOffset] = srcData[i];
 		}
 
 		// Make the image brighter by doubling the rgb values
-		for(i = 0; i < _len; i++) {
-			data[i++] *= 2;
-			data[i++] *= 2;
-			data[i++] *= 2;
+		// Darken the even lines (dataIndex*4*2)
+		w4 = w * 1 * 4;
+		w8 = w * 2 * 4;
+		for (i = 0; i < _len; i++) {
+			if (i % w8 <= w4) {
+				data[i++] = 0;
+				data[i++] = 0;
+				data[i++] = 0;
+			}
+			else {
+				data[i++] *= 2;
+				data[i++] *= 2;
+				data[i++] *= 2;
+			}
 		}
 
 		// TODO: The above loops are the most costly in this function, iterating
@@ -133,12 +145,6 @@
 
 		// copy the tweaked ImageData back into the context
 		tempCtx.putImageData(targetImageData, 0, 0);
-
-		// add scan lines
-		tempCtx.fillStyle = "rgb(0,0,0)";
-		for (i = 0; i < h; i += 2) {
-			tempCtx.fillRect (0, i, w, 1);
-		}
 
 		return tempCanvas;
 	};
