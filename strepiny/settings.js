@@ -42,7 +42,7 @@ var settings = {
   'font' : {
     "Navarenssis"   : "alien_linessymbol",
     "BDI"           : "omikron-webfont",
-    "Exarchos"      : "anilloregular",
+    "Nobilia"       : "anilloregular",
     "Belliger"      : "silverstreamregular"
   },
   'color': {

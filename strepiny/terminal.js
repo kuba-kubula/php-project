@@ -399,6 +399,7 @@ EnvironmentClass.prototype.getScreen = function () {
 
 EnvironmentClass.prototype.setFont = function (fontName) {
   this.el.attr('class', settings.font[fontName]);
+  this.data.scrollFirst();
 };
 EnvironmentClass.prototype.engineerAccess = function () {
   return (environment.getAccountName() == 'MAINTENANCE' && environment.getPass() == 'INSECURITY') || (environment.getAccountName() == 'S3RV1S' && environment.getPass() == 'D8')

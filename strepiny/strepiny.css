@@ -183,7 +183,7 @@ body {
 	line-height: 18px;
 }
 #environment.omikron-webfont #dta div {
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 18px;
 }
 
@@ -409,7 +409,14 @@ body.terminal #main #termbg.offline {
 body.terminal #main #termbg.online {
 	background-position: 0 0;
 }
-
+body.terminal #main #termbg.offline ~ div .button, body.terminal #main #termbg.offline ~ #dta div, body.terminal #main #termbg.offline ~ #inputLine {
+	color: rgb(220, 30, 30) !important;
+}
+body.terminal #main #termbg.offline ~ #inputLine:after {
+	position: absolute;
+	right: 0;
+	content: 'Terminal offline';
+}
 body.terminal span.button {
 	position: absolute;
 	text-align: center;
