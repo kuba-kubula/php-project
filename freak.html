@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<script src="jquery.min.js"></script>
+
+<ul class="embedLinksList">
+  <li>
+    <h3>Shopping Cart Resources</h3>
+    <ul>
+      <li>
+        <a href="http://docs.jakub.apiary-debug.herokuapp.com/embed/get/shopping-cart">GET /shopping-cart</a> ...
+        <a href="http://docs.jakub.apiary-debug.herokuapp.com/embed/get/shopping-cart?social=false">without comments</a> ...
+        <a href="http://docs.jakub.apiary-debug.herokuapp.com/embed/get/shopping-cart?debugger=false">without debugger</a> ...
+        <a href="http://docs.jakub.apiary-debug.herokuapp.com/embed/get/shopping-cart?debugger=false&amp;open=example&amp;social=false">open example wo/ debugger &amp; wo/ comments</a> ...
+        <a href="http://docs.jakub.apiary-debug.herokuapp.com/embed/get/shopping-cart?open=tryit">open TryIt</a>
+        <form class="block" action="http://docs.jakubeditor.apiary-debug.herokuapp.com/embed/get/shopping-cart" method="post">
+          <label><input type="checkbox" name="debugger" value="false"> wo/ Debugger</label>
+          <label><input type="checkbox" name="social" value="false"> wo/ Comments</label>
+          <label><input type="checkbox" name="tryit" value="false"> wo/ Try It</label>
+          <label>showing: <select name="open"><option>- nothing -</option><option value="example">example</option><option value="debugger">debugger</option><option value="social">comments</option><option value="tryit">try it</option></select></label>
+          <button type="submit">SHOW</button>
+        </form>
+      </li>
+      <li>
+        <a href="http://docs.jakubeditor.apiary-debug.herokuapp.com/embed/post/shopping-cart">POST /shopping-cart</a> ...
+        <a href="http://docs.jakubeditor.apiary-debug.herokuapp.com/embed/post/shopping-cart?social=false">without comments</a> ...
+        <a href="http://docs.jakubeditor.apiary-debug.herokuapp.com/embed/post/shopping-cart?debugger=false">without debugger</a> ...
+        <a href="http://docs.jakubeditor.apiary-debug.herokuapp.com/embed/post/shopping-cart?debugger=false&amp;open=example&amp;social=false">open example wo/ debugger &amp; wo/ comments</a> ...
+        <a href="http://docs.jakubeditor.apiary-debug.herokuapp.com/embed/post/shopping-cart?open=tryit">open TryIt</a>
+        <form class="block" action="http://docs.jakubeditor.apiary.dev:8000/embed/post/shopping-cart" method="post">
+          <label><input type="checkbox" name="debugger" value="false"> wo/ Debugger</label>
+          <label><input type="checkbox" name="social" value="false"> wo/ Comments</label>
+          <label><input type="checkbox" name="tryit" value="false"> wo/ Try It</label>
+          <label>showing: <select name="open"><option>- nothing -</option><option value="example">example</option><option value="debugger">debugger</option><option value="social">comments</option><option value="tryit">try it</option></select></label>
+          <button type="submit">SHOW</button>
+        </form>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<script type="text/javascript">
+  $(function () {
+    $(window).bind('message', function (ev) {
+      ev = ev.originalEvent;
+      var origin = ev.origin || ev.domain || location.host;
+      origin = origin.replace(/^(http(s)?:\/\/)/g, '').split(":", 2).shift();
+      originTest = new RegExp("\\.apiary\\.|\\.apiary-debug\\.", "i");
+      if (originTest.test(origin)) {
+        try {
+          data = JSON.parse(ev.data);
+        } catch (exc) {
+          alert("Something went wrong with the embed window, we are very sorry.\n" + exc);
+          return false;
+        }
+        var i = $('iframe[name="' + data.location.replace(/[\"]/g, '_') + '"]');
+        i.css({height: data.height});
+      }
+      else {
+        alert('Wrong Origin...' + "\n" + origin);
+      }
+
+    });
+
+    var renderIframe = function (where, url) {
+      where.parent().append($('<div class="embedDiv"><iframe name="' + url.split('?').shift().replace(/[\"]/g, '_') + '" src="' + url + '" height="250" width="1010" allowtransparency="true"></iframe></div>'));
+    };
+
+    $('ul.embedLinksList a').bind('click', function (e) {
+      e.preventDefault();
+      e = $(this);
+      if (e.siblings('div').length > 0) {
+        e.parent().find('iframe').attr('src', e.attr('href'));
+        return false;
+      }
+      renderIframe(e, e.attr('href'));
+    });
+
+    $('ul.embedLinksList form').bind('submit', function (e) {
+      e.preventDefault();
+      e = $(this);
+      if (e.siblings('div').length > 0) {
+        e.parent().find('iframe').attr('src', e.attr('action') + '?' + e.serialize());
+        return false;
+      }
+      renderIframe(e, e.attr('action') + '?' + e.serialize());
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(function () {
+    $(window).bind('message', function (ev) {
+      ev = ev.originalEvent;
+      var origin = ev.origin || ev.domain || location.host;
+      origin = origin.replace(/^(http(s)?:\/\/)/g, '').split(":", 2).shift();
+      originTest = new RegExp("\\.apiary\\.", "i");
+      if (originTest.test(origin)) {
+        try {
+          data = JSON.parse(ev.data);
+        } catch (exc) {
+          alert("Something went wrong with the embed window, we are very sorry.\n" + exc);
+          return false;
+        }
+        var i = $('iframe[name="' + data.location.replace(/[\"]/g, '_') + '"]');
+        i.css({height: data.height});
+      }
+
+    });
+
+    var renderIframe = function (where, url) {
+      where.parent().append($('<div class="embedDiv"><iframe name="' + url.split('?').shift().replace(/[\"]/g, '_') + '" src="' + url + '" height="250" width="1010" allowtransparency="true"></iframe></div>'));
+    };
+
+    $('ul.embedLinksList a').bind('click', function (e) {
+      e.preventDefault();
+      e = $(this);
+      if (e.siblings('div').length > 0) {
+        e.parent().find('iframe').attr('src', e.attr('href'));
+        return false;
+      }
+      renderIframe(e, e.attr('href'));
+    });
+
+    $('ul.embedLinksList form').bind('submit', function (e) {
+      e.preventDefault();
+      e = $(this);
+      if (e.siblings('div').length > 0) {
+        e.parent().find('iframe').attr('src', e.attr('action') + '?' + e.serialize());
+        return false;
+      }
+      renderIframe(e, e.attr('action') + '?' + e.serialize());
+    });
+  });
+</script>  
+</body>
+</html>
